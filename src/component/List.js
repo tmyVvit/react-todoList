@@ -3,9 +3,7 @@ import '../App.css';
 
 export default class List extends Component {
 
-    check = (id)=>{
-        
-    }
+
     render(){
         let list = this.props.list;
         let listInfo = [];

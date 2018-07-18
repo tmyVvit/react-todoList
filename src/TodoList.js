@@ -8,36 +8,57 @@ export default class TodoList extends Component {
     constructor(props){
         super(props);
         this.state={
-            todoList:[{
-                id: "1",
-                content:"1",
-                complete:false,
-            },{
-                id: "1",
-                content:"2",
-                complete:true,
-            },
-        ],
+            todoList:[],
         };
     }
+    generateUUID=()=> {
+        /*jshint bitwise:false */
+        var i,
+            random;
+        var uuid = '';
 
-    unCheck = (id)=>{
-        // this.setState(
-        //     this.state.todoList : this.state.todoList.map(elem=>{
-        //         if(elem.id===id)
-        //     }),
-
-        // );
+        for (i = 0; i < 32; i++) {
+            random = Math.random() * 16 | 0;
+            if (i === 8 || i === 12 || i === 16 || i === 20) {
+                uuid += '-';
+            }
+            uuid += (i === 12
+                ? 4
+                : (i === 16
+                    ? (random & 3 | 8)
+                    : random)).toString(16);
+        }
+        return uuid;
     }
+
+    handleAdd = (value)=>{
+        let addItem = {
+            id:this.generateUUID(),
+            content:value,
+            complete:false
+        }
+        let todoList = this.state.todoList;
+        todoList.push(addItem);
+        this.setState({
+            todoList
+        })
+    }
+
+        // unCheck = (id)=>{
+    //     this.setState(
+    //         this.state.todoList : this.state.todoList.map(elem=>{
+    //             if(elem.id===id)
+    //         }),
+
+    //     );
+    // }
+    
     render() {
         return (
             <div>
                 <Header />
-                {/* <AddInput /> */}
-                <div>
-                <input className="input-text" type="text" name="ListItem" />
-                <div id="button">Add</div>
-            </div>
+                <AddInput add={(value)=>this.handleAdd(value)} /> 
+                
         
             <br />
                 <List list={this.state.todoList} />

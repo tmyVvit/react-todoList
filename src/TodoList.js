@@ -47,6 +47,7 @@ export default class TodoList extends Component {
     }
 
     handleCheck = (id)=>{
+        
         let todoList = this.state.todoList;
         todoList = todoList.map(elem=>{
             if(elem.id===id){
@@ -58,22 +59,41 @@ export default class TodoList extends Component {
     }
 
     setFilter = (filterType)=>{
-        console.log(filterType);
+        
         this.setState({
             filterType,
         })
     }
 
+    handleModify = (id, content)=>{
+        let todoList = this.state.todoList.map(elem=>{
+            if(elem.id===id){
+                console.log("TodoList: "+content);
+                console.log("TodoList elem : "+elem.content);
+                elem.content = content;
+                console.log("TodoList elem : "+elem.content);
+
+            }
+            return elem;
+        });
+        
+        this.setState({
+            todoList,
+        });
+    }
     render() {
         let todoList = this.state.todoList;
         let filterType = this.state.filterType;
-
+        
         return (
             <div>
                 <Header />
                 <AddInput add={(value)=>this.handleAdd(value)} />
             <br />
-                <List list={todoList} filterType={filterType} handleCheck={(id)=>this.handleCheck(id)}/>
+                <List list={todoList} 
+                    filterType={filterType} 
+                    handleCheck={(id)=>this.handleCheck(id)}
+                    handleModify={(id, content)=>this.handleModify(id, content)}/>
                 <Filters setFilter={(filterType)=>this.setFilter(filterType)} />
             </div>
 

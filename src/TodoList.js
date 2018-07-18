@@ -44,14 +44,16 @@ export default class TodoList extends Component {
         })
     }
 
-        // unCheck = (id)=>{
-    //     this.setState(
-    //         this.state.todoList : this.state.todoList.map(elem=>{
-    //             if(elem.id===id)
-    //         }),
-
-    //     );
-    // }
+    handleCheck = (id)=>{
+        let todoList = this.state.todoList;
+        todoList = todoList.map(elem=>{
+            if(elem.id===id){
+                elem.complete = !elem.complete;
+            }
+            return elem;
+        })
+        this.setState({todoList});
+    }
     
     render() {
         return (
@@ -61,7 +63,7 @@ export default class TodoList extends Component {
                 
         
             <br />
-                <List list={this.state.todoList} />
+                <List list={this.state.todoList} handleCheck={(id)=>this.handleCheck(id)}/>
                 <div>
                     <ul id="filters">
                         <li>

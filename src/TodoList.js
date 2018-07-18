@@ -4,11 +4,13 @@ import './App.css';
 import Header from "./component/Header"
 import AddInput from './component/AddInput';
 import List from './component/List'
+import Filters from './component/Filters';
 export default class TodoList extends Component {
     constructor(props){
         super(props);
         this.state={
             todoList:[],
+            filterType:"all",
         };
     }
     generateUUID=()=> {
@@ -54,29 +56,25 @@ export default class TodoList extends Component {
         })
         this.setState({todoList});
     }
-    
+
+    setFilter = (filterType)=>{
+        console.log(filterType);
+        this.setState({
+            filterType,
+        })
+    }
+
     render() {
+        let todoList = this.state.todoList;
+        let filterType = this.state.filterType;
+
         return (
             <div>
                 <Header />
-                <AddInput add={(value)=>this.handleAdd(value)} /> 
-                
-        
+                <AddInput add={(value)=>this.handleAdd(value)} />
             <br />
-                <List list={this.state.todoList} handleCheck={(id)=>this.handleCheck(id)}/>
-                <div>
-                    <ul id="filters">
-                        <li>
-                            <a href="#" data-filter="all" className="selected">ALL</a>
-                        </li>
-                        <li>
-                            <a href="#" data-filter="active" className="" >Active</a>
-                        </li>
-                        <li>
-                            <a href="#" data-filter="complete" className="" >Complete</a>
-                        </li>
-                    </ul>
-                </div>
+                <List list={todoList} filterType={filterType} handleCheck={(id)=>this.handleCheck(id)}/>
+                <Filters setFilter={(filterType)=>this.setFilter(filterType)} />
             </div>
 
             );

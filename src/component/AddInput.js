@@ -11,6 +11,7 @@ export default class AddInput extends Component {
         console.log(input)
         if(input !== "")
             this.props.onAddItem(input);
+        this.inputText.current.value = ""
     }
     render() {
         return (

@@ -1,34 +1,24 @@
+import * as fType from '../constants/FilterType'
 import React, {Component} from 'react'
 import '../App.css';
-import TodoItem from './TodoItem';
+import TodoItem from '../containers/TodoItemContainer';
 
 export default class List extends Component {
 
-    handleCheck = (id)=>{
-        
-        this.props.handleCheck(id);
-    }
-
     filterExe = (elem) => {
         let filterType = this.props.filterType;
-        if(filterType==="all") return true;
-        if(filterType==="active") return !elem.complete;
-        if(filterType==="complete") return elem.complete;
-    }
-
-    listModify = (id, content)=> {
-        this.props.handleModify(id, content);
+        if(filterType===fType.ALL) return true;
+        if(filterType===fType.ACTIVE) return !elem.complete;
+        if(filterType===fType.COMPLETE) return elem.complete;
     }
     render(){
-        let list = this.props.list;
+        const {list, filterType} = this.props;
         let listInfo = [];
         list.filter(this.filterExe).map(item=>{
             listInfo.push(
-                <TodoItem id={item.id}
-                        complete={item.complete}
-                        content={item.content}
-                        handleCheck={(id)=>this.handleCheck(id)}
-                        listModify={(id, content)=>this.listModify(id, content)}
+                <TodoItem
+                    id={item.id}
+                    key={item.id}
                 />
             )
         })

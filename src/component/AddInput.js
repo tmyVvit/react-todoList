@@ -3,26 +3,19 @@ import '../App.css';
 export default class AddInput extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            input:'',
-        }
-    }
-    handleChange = (e)=> {
-        this.setState({
-            input:e.target.value
-        })
+        this.inputText = React.createRef();
     }
 
-    addInput = (e)=>{
-        if(this.state.input !== ""){
-            this.props.add(this.state.input);
-            this.setState({input:''})
-        }
+    addInput = ()=>{
+        const input = this.inputText.current.value;
+        console.log(input)
+        if(input !== "")
+            this.props.onAddItem(input);
     }
     render() {
         return (
             <div>
-                <input className="input-text" type="text" name="ListItem" value={this.state.input} onChange={this.handleChange}/>
+                <input className="input-text" type="text" name="ListItem" ref={this.inputText}/>
                 <div id="button" onClick={this.addInput}>Add</div>
             </div>
         );

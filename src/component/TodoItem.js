@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import '../App.css';
 
 export default class TodoItem extends Component {
+ 
 
     modify = (e)=>{
         e.target.setAttribute("contentEditable", true);
@@ -16,6 +17,12 @@ export default class TodoItem extends Component {
             this.props.onModify(e.target.id, e.target.innerText);
         }
     }
+    handleOnBlur = (e) => {
+            console.log("onBlur:  " +e)
+            e.target.setAttribute('contentEditable', false);
+            this.props.onModify(e.target.id, e.target.innerText);
+    }
+
 
     render(){
         const{item, onCheckItem} = this.props;
@@ -25,12 +32,15 @@ export default class TodoItem extends Component {
         return (
             <li id={id}
                 className={complete?"checked":""}
-                onDoubleClick={(e)=>this.modify(e)}
-                onKeyPress={(e)=>this.handleKeyPress(e)}>
+                onDoubleClick={this.modify}
+                onKeyPress={this.handleKeyPress}
+                onBlur={this.handleOnBlur}
+                >
                 <input
                     type="checkbox"
                     checked={complete?"checked":""}
-                    onChange={()=>onCheckItem(id)} />
+                    onChange={()=>onCheckItem(id)}
+                    />
                 {text}
             </li>
         );

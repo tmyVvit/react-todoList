@@ -4,8 +4,6 @@ import TodoList from './TodoList';
 
 class App extends Component {
   render() {
-    const {list} = this.props;
-
     return (
       <TodoList />
     );

@@ -1,9 +1,9 @@
 import * as type from '../constants/ActionType'
 
-export const add = (text)=> {
+export const add = (item)=> {
     return {
         type: type.ADD,
-        text,
+        item,
     }
 }
 

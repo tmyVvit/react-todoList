@@ -10,7 +10,9 @@ const mapStateToProps = (state, ownProps) =>{
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onSetFilter: (filter)=>dispatch(setFilter(filter)),
+        onSetFilter: (filter)=>{
+            dispatch(setFilter(filter))
+        },
     }
 }
 

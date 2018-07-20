@@ -1,6 +1,7 @@
 import {connect} from 'react-redux'
 import AddInput from '../component/AddInput'
 import {add} from '../actions'
+import listAPI from '../api/ListApi'
 
 const mapStateToProps = (state, ownProps) =>{
     return {}
@@ -8,7 +9,10 @@ const mapStateToProps = (state, ownProps) =>{
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onAddItem:(text) => dispatch(add(text)),
+        onAddItem:(text) => {
+            let item = listAPI.addItems(text);
+            dispatch(add(item));
+        },
     }
 }
 

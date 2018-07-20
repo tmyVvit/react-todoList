@@ -14,11 +14,7 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, {
                 todoList:[
                     ...state.todoList,
-                    {
-                        id: generateUUID(),
-                        text: action.text,
-                        complete: false,
-                    }
+                    action.item
                 ],
             })
         }

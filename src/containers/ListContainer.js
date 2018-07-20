@@ -1,10 +1,12 @@
 import {connect} from 'react-redux'
 import List from '../component/List'
+import listAPI from '../api/ListApi'
 
 const mapStateToProps = (state, ownProps) =>{
     return {
-        list: state.todoList,
-        filterType: state.filter
+        filterList: listAPI.getFilterList(state.filter, state.todoList),
+        // filter: state.filter,
+        // todoList: state.todoList
     }
 }
 

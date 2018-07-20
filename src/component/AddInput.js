@@ -8,7 +8,6 @@ export default class AddInput extends Component {
 
     addInput = ()=>{
         const input = this.inputText.current.value;
-        console.log(input)
         if(input !== "")
             this.props.onAddItem(input);
         this.inputText.current.value = ""

@@ -9,9 +9,7 @@ export default class Filter extends Component{
             current: this.props.currentFilter,
         }
     }
-    changeFilter = (e)=>{
-        this.props.handleFilter(e);
-    }
+
     render(){
         const {filterType, onSetFilter} = this.props;
         return (

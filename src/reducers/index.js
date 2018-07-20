@@ -1,4 +1,5 @@
 import * as type from '../constants/ActionType'
+import * as fType from '../constants/FilterType'
 
 const initialState = {
     filter: 'all',
@@ -6,9 +7,10 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-    console.log(state.todoList)
     switch(action.type){
         case type.ADD:{
+            // console.log("reduce add: "+state.todoList)
+            // console.log("reduce add: "+ action.text)
             return Object.assign({}, state, {
                 todoList:[
                     ...state.todoList,
@@ -17,7 +19,7 @@ export default (state = initialState, action) => {
                         text: action.text,
                         complete: false,
                     }
-                ]
+                ],
             })
         }
         case type.CHECK:{

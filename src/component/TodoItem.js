@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import '../App.css';
 
 export default class TodoItem extends Component {
- 
-
     modify = (e)=>{
         e.target.setAttribute("contentEditable", true);
         e.target.focus();
@@ -18,7 +16,6 @@ export default class TodoItem extends Component {
         }
     }
     handleOnBlur = (e) => {
-            console.log("onBlur:  " +e)
             e.target.setAttribute('contentEditable', false);
             this.props.onModify(e.target.id, e.target.innerText);
     }
@@ -26,9 +23,7 @@ export default class TodoItem extends Component {
 
     render(){
         const{item, onCheckItem} = this.props;
-        const id = item.id;
-        const complete = item.complete;
-        const text = item.text;
+        const {id, complete, text} = item;
         return (
             <li id={id}
                 className={complete?"checked":""}

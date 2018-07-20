@@ -1,17 +1,24 @@
 import {connect} from 'react-redux'
 import List from '../component/List'
+import {check, modify} from '../actions'
 import listAPI from '../api/ListApi'
 
 const mapStateToProps = (state, ownProps) =>{
     return {
-        filterList: listAPI.getFilterList(state.filter, state.todoList),
-        // filter: state.filter,
-        // todoList: state.todoList
+        filterList: state.todoList,
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
+        onModify:(id, text) => {
+
+            dispatch(modify(id, text))
+        },
+        onCheckItem: (id) => {
+            listAPI.checkItem(id)
+            dispatch(check(id))
+        },
     }
 }
 

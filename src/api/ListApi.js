@@ -3,8 +3,10 @@ import { setFilter } from '../actions';
 
 const listAPI = {
     todoList : [],
-    getFilterList  (filter, todoList){
-        return todoList.filter(item=>{
+    filter : fType.ALL,
+    getFilterList  (filter){
+        this.filter = filter;
+        return this.todoList.filter(item=>{
             switch(filter){
                 case fType.ALL: return true;
                 case fType.ACTIVE: return !item.complete;
@@ -20,12 +22,27 @@ const listAPI = {
             complete: false,
         }
         this.todoList.push(add);
-        return add;
+        if(this.filter === fType.ALL) return add;
+        if(this.filter === fType.COMPLETE && add.complete) return add;
+        if(this.filter === fType.ACTIVE && !add.complete) return add;
+        return null;
     },
 
-    // setFilter(filter){
-    //     if(filter===fType.ALL)
-    // }
+    checkItem(id){
+        let newTodo = [...this.todoList];
+        newTodo = newTodo.map(item=>{
+            if(item.id===id){
+                return {
+                    id,
+                    text:item.text,
+                    complete: !item.complete
+                }
+            }
+            return item
+        })
+        console.log("API CHECK: " + newTodo)
+        this.todoList = [...newTodo]
+    }
 
 }
 

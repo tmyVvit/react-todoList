@@ -14,10 +14,11 @@ export const check = (id)=> {
     }
 }
 
-export const setFilter = (filter)=>{
+export const setFilter = (filter, filterList)=>{
     return {
         type: type.FILTER,
         filter,
+        filterList,
     }
 }
 

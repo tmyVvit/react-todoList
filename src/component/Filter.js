@@ -3,12 +3,6 @@ import React, {Component} from 'react'
 import '../App.css';
 
 export default class Filter extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            current: this.props.currentFilter,
-        }
-    }
 
     render(){
         const {filterType, onSetFilter} = this.props;

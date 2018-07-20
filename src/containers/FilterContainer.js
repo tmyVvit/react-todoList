@@ -1,6 +1,7 @@
 import {connect} from 'react-redux'
 import Filter from '../component/Filter';
 import { setFilter } from '../actions';
+import listAPI from '../api/ListApi'
 
 const mapStateToProps = (state, ownProps) =>{
     return {
@@ -11,7 +12,8 @@ const mapStateToProps = (state, ownProps) =>{
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onSetFilter: (filter)=>{
-            dispatch(setFilter(filter))
+            let filterList = listAPI.getFilterList(filter);
+            dispatch(setFilter(filter, filterList));
         },
     }
 }

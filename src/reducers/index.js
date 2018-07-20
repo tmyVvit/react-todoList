@@ -9,14 +9,14 @@ const initialState = {
 export default (state = initialState, action) => {
     switch(action.type){
         case type.ADD:{
-            // console.log("reduce add: "+state.todoList)
-            // console.log("reduce add: "+ action.text)
-            return Object.assign({}, state, {
-                todoList:[
-                    ...state.todoList,
-                    action.item
-                ],
-            })
+            if(action.item !== null) {
+                return Object.assign({}, state, {
+                    todoList:[
+                        ...state.todoList,
+                        action.item
+                    ],
+                })
+            }
         }
         case type.CHECK:{
             return Object.assign({}, state, {
@@ -31,9 +31,12 @@ export default (state = initialState, action) => {
             })
         }
         case type.FILTER:{
-            return Object.assign({}, state, {
-                filter:action.filter
-            })
+            console.log(action.filter)
+
+            return {
+                filter: action.filter,
+                todoList:action.filterList
+            };
         }
         case type.MODIFY:{
             console.log("modify:  "+state);
@@ -53,23 +56,3 @@ export default (state = initialState, action) => {
     }
 }
 
-
-const generateUUID=()=> {
-    /*jshint bitwise:false */
-    var i,
-        random;
-    var uuid = '';
-
-    for (i = 0; i < 32; i++) {
-        random = Math.random() * 16 | 0;
-        if (i === 8 || i === 12 || i === 16 || i === 20) {
-            uuid += '-';
-        }
-        uuid += (i === 12
-            ? 4
-            : (i === 16
-                ? (random & 3 | 8)
-                : random)).toString(16);
-    }
-    return uuid;
-}

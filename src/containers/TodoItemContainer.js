@@ -4,7 +4,6 @@ import {check, modify} from '../actions'
 
 const mapStateToProps = (state, ownProps) =>{
     return {
-        item : state.todoList.find(elem=>elem.id===ownProps.id),
     }
 }
 

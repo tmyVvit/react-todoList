@@ -1,5 +1,5 @@
 import * as fType from '../constants/FilterType'
-import { setFilter } from '../actions';
+import { setFilter, modify } from '../actions';
 
 const listAPI = {
     todoList : [],
@@ -42,7 +42,21 @@ const listAPI = {
         })
         console.log("API CHECK: " + newTodo)
         this.todoList = [...newTodo]
-    }
+    },
+
+    modify(id, text) {
+        let newTodo = this.todoList.map(item=>{
+            if(item.id === id){
+                return {
+                    id,
+                    text,
+                    complete: item.complete
+                }
+            }
+            return item
+        })
+        this.todoList = [...newTodo]
+    },
 
 }
 

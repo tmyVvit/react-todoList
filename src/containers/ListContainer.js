@@ -12,8 +12,8 @@ const mapStateToProps = (state, ownProps) =>{
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onModify:(id, text) => {
-
-            dispatch(modify(id, text))
+            let item = listAPI.modify(id, text)
+            dispatch(modify(item))
         },
         onCheckItem: (id) => {
             listAPI.checkItem(id)

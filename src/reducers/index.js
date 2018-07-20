@@ -39,13 +39,10 @@ export default (state = initialState, action) => {
             };
         }
         case type.MODIFY:{
-            console.log("modify:  "+state);
             return Object.assign({}, state, {
                 todoList: state.todoList.map((item)=>{
                     if(item.id===action.id){
-                        return Object.assign({}, item, {
-                            text:action.text
-                        })
+                        return action.item;
                     }
                     return item;
                 })

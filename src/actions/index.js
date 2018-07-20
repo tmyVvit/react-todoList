@@ -22,10 +22,9 @@ export const setFilter = (filter, filterList)=>{
     }
 }
 
-export const modify = (id, text)=> {
+export const modify = (item)=> {
     return {
         type: type.MODIFY,
-        id,
-        text,
+        item,
     }
 }

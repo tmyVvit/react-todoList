@@ -34,7 +34,6 @@ export default class Filter extends Component{
             </li>
                 </ul>
             </div>
-            
         );
     }
 }

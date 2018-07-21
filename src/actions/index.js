@@ -7,10 +7,10 @@ export const add = (item)=> {
     }
 }
 
-export const check = (id)=> {
+export const check = (list)=> {
     return {
         type: type.CHECK,
-        id,
+        list,
     }
 }
 

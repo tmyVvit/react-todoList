@@ -19,20 +19,12 @@ export default (state = initialState, action) => {
             }
         }
         case type.CHECK:{
-            return Object.assign({}, state, {
-                todoList: state.todoList.map((item)=>{
-                    if(item.id===action.id){
-                        return Object.assign({}, item, {
-                            complete: !item.complete
-                        })
-                    }
-                    return item;
-                })
-            })
+            return {
+                filter: state.filter,
+                todoList:action.list
+            }
         }
         case type.FILTER:{
-            console.log(action.filter)
-
             return {
                 filter: action.filter,
                 todoList:action.filterList

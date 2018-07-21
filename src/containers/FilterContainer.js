@@ -15,6 +15,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             let filterList = listAPI.getFilterList(filter);
             dispatch(setFilter(filter, filterList));
         },
+        onSetFilterNew: (filter) => {
+            listAPI.getFilterRemoteList(filter, todos=>{
+                dispatch(setFilter(filter, todos))
+            })
+        },
     }
 }
 

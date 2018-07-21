@@ -15,6 +15,10 @@ const listAPI = {
         });
     },
 
+    getFilterRemoteList(){
+
+    },
+
     addItems (text) {
         let add = {
             id: generateUUID(),
@@ -42,6 +46,7 @@ const listAPI = {
         })
         console.log("API CHECK: " + newTodo)
         this.todoList = [...newTodo]
+        return this.getFilterList(this.filter);
     },
 
     modify(id, text) {

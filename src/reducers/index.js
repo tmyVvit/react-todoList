@@ -1,11 +1,14 @@
 import * as type from '../constants/ActionType'
 import * as fType from '../constants/FilterType'
+import listAPI from '../api/ListApi'
+
 
 const initialState = {
-    filter: 'all',
+    filter:"all",
     todoList:[]
-}
-
+};
+// = listAPI.getInitStat((status)=>{});
+// listAPI.getInitState(((status)=>setState(status, initialState)))
 export default (state = initialState, action) => {
     switch(action.type){
         case type.ADD:{

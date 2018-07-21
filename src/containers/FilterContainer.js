@@ -5,18 +5,18 @@ import listAPI from '../api/ListApi'
 
 const mapStateToProps = (state, ownProps) =>{
     return {
-        filterType: state.filter
+        // filterType: state.filter
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onSetFilter: (filter)=>{
+        onSetFilterOld: (filter)=>{
             let filterList = listAPI.getFilterList(filter);
             dispatch(setFilter(filter, filterList));
         },
-        onSetFilterNew: (filter) => {
-            listAPI.getFilterRemoteList(filter, todos=>{
+        onSetFilter: (filter) => {
+            listAPI.getRemoteFilterList(filter, todos=>{
                 dispatch(setFilter(filter, todos))
             })
         },

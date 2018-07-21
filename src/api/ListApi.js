@@ -1,9 +1,13 @@
 import * as fType from '../constants/FilterType'
 import { setFilter, modify } from '../actions';
+import Axios from '../../node_modules/axios';
 
+const axios = require('axios');
 const listAPI = {
     todoList : [],
     filter : fType.ALL,
+    url: "https://5b52c3e9d9b92700141c997b.mockapi.io/allTodo",
+    url1:"https://5b519ee96ecd1b0014aa3555.mockapi.io/test/api/data",
     getFilterList  (filter){
         this.filter = filter;
         return this.todoList.filter(item=>{
@@ -14,9 +18,21 @@ const listAPI = {
             }
         });
     },
-
-    getFilterRemoteList(){
-
+    
+    getRemoteFilterList(filter, successCallback){
+        let search = ""
+        if(filter !== fType.ALL){
+            search = `?search=${filter}`;
+        }
+        axios
+            .get(`${this.url}/1/todoList${search}`)
+            .then(response=>{
+                console.log("get-----"+JSON.stringify(response.data));
+                successCallback(response.data)
+            })
+            .catch(error=>{
+                console.log("error-----"+error)
+            })
     },
 
     addItems (text) {
@@ -30,6 +46,17 @@ const listAPI = {
         if(this.filter === fType.COMPLETE && add.complete) return add;
         if(this.filter === fType.ACTIVE && !add.complete) return add;
         return null;
+    },
+
+    addItemToRemote(text, successCallback){
+        let add = {
+            id: generateUUID(),
+            text,
+            complete: false,
+            status: "active",
+        }
+        axios
+            .post(`${this.url}/1/todoList`,)
     },
 
     checkItem(id){

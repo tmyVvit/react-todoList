@@ -23,9 +23,9 @@ export default class TodoItem extends Component {
 
     render(){
         const{item, onCheckItem} = this.props;
-        const {uuid, complete, text, status} = item;
+        const {uuid, complete, text, id} = item;
         return (
-            <li id={uuid}
+            <li id={id}
                 className={complete?"checked":""}
                 onDoubleClick={this.modify}
                 onKeyPress={this.handleKeyPress}

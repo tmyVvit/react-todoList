@@ -105,7 +105,7 @@ const listAPI = {
                         successCallback(response.data)
                     })
                     .catch(error=>{
-                        console.log("check get error-----"+error)
+                        console.log("check get list error-----"+error)
                     });
             })
             .catch(error=>{
@@ -126,6 +126,30 @@ const listAPI = {
             return item
         })
         this.todoList = [...newTodo]
+    },
+    modifyRemote(id, text, successCallback){
+        let search="";
+        if(this.filter !== fType.ALL) search=`?search=${this.filter}`;
+        // console.log("check remote--item--"+JSON.stringify(item))
+        axios
+            .put(`${this.url}/1/todoList/${id}`, {
+                text,
+            })
+            .then(response=>{
+                axios
+                    .get(`${this.url}/1/todoList${search}`)
+                    .then(response=>{
+                        console.log("modify response----"+JSON.stringify(response.data));
+                        successCallback(response.data)
+                    })
+                    .catch(error=>{
+                        console.log("modify get list error-----"+error)
+                    });
+            })
+            .catch(error=>{
+                console.log("check put error-----"+error)
+            });
+
     },
 
 }

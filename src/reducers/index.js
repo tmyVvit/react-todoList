@@ -34,14 +34,10 @@ export default (state = initialState, action) => {
             };
         }
         case type.MODIFY:{
-            return Object.assign({}, state, {
-                todoList: state.todoList.map((item)=>{
-                    if(item.uuid===action.uuid){
-                        return action.item;
-                    }
-                    return item;
-                })
-            })
+            return {
+                filter: state.filter,
+                todoList: action.list
+            }
         }
 
         default: return state;

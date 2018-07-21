@@ -11,12 +11,17 @@ const mapStateToProps = (state, ownProps) =>{
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onModify:(id, text) => {
+        onModifyOld:(id, text) => {
             let item = listAPI.modify(id, text)
             dispatch(modify(item))
         },
-        onCheckItemOld: (uuid) => {
-            let newList = listAPI.checkItem(uuid)
+        onModify:(id, text)=>{
+            listAPI.modifyRemote(id, text, newList=>{
+                dispatch(modify(newList))
+            })
+        },
+        onCheckItemOld: (id) => {
+            let newList = listAPI.checkItem(id)
             dispatch(check(newList))
         },
         onCheckItem: (item) => {

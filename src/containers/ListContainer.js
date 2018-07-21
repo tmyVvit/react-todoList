@@ -15,9 +15,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             let item = listAPI.modify(id, text)
             dispatch(modify(item))
         },
-        onCheckItem: (id) => {
-            let newList = listAPI.checkItem(id)
+        onCheckItemOld: (uuid) => {
+            let newList = listAPI.checkItem(uuid)
             dispatch(check(newList))
+        },
+        onCheckItem: (item) => {
+            listAPI.checkItemRemote(item, newList=>{
+                dispatch(check(newList))
+            })
         },
     }
 }

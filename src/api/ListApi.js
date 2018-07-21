@@ -1,4 +1,5 @@
 import * as fType from '../constants/FilterType'
+import * as sType from '../constants/StatusType'
 import { setFilter, modify } from '../actions';
 import Axios from '../../node_modules/axios';
 
@@ -54,14 +55,14 @@ const listAPI = {
             uuid: generateUUID(),
             text,
             complete: false,
-            status: "active",
+            status: sType.ACTIVE,
         }
         axios
-            .post(`${this.url}/1/todoList`,add)
+            .post(`${this.url}/1/todoList`,{...add, parentID:"1"})
             .then(response=>{
                 console.log("addItem-----"+JSON.stringify(response.data))
                 if(this.filter===fType.ALL||add.status === this.filter){
-                    successCallback(add);
+                    successCallback(response.data);
                 }
             })
             .catch(error=>{
@@ -84,6 +85,28 @@ const listAPI = {
         console.log("API CHECK: " + newTodo)
         this.todoList = [...newTodo]
         return this.getFilterList(this.filter);
+    },
+
+    checkItemRemote(item, successCallback){
+        let newState = item.complete==true?sType.ACTIVE:sType.COMPLETE;
+        console.log("check remote--item--"+JSON.stringify(item))
+        axios
+            .put(`${this.url}/1/todoList/${item.id}/list`, {
+                complete: !item.complete,
+                status: newState
+            })
+            .catch(error=>{
+                console.log("check put error-----"+error)
+            });
+        axios
+            .get(`${this.url}/1/todoList?search=${newState}`)
+            .then(response=>{
+                console.log("check response----"+JSON.stringify(response.data));
+                successCallback(response.data)
+            })
+            .catch(error=>{
+                console.log("check get error-----"+error)
+            });
     },
 
     modify(id, text) {

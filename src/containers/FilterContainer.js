@@ -11,10 +11,6 @@ const mapStateToProps = (state, ownProps) =>{
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onSetFilterOld: (filter)=>{
-            let filterList = listAPI.getFilterList(filter);
-            dispatch(setFilter(filter, filterList));
-        },
         onSetFilter: (filter) => {
             listAPI.getRemoteFilterList(filter, todos=>{
                 dispatch(setFilter(filter, todos))

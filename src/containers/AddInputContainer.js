@@ -9,10 +9,6 @@ const mapStateToProps = (state, ownProps) =>{
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onAddItemOld:(text) => {
-            let item = listAPI.addItems(text);
-            dispatch(add(item));
-        },
         onAddItem:(text) => {
             listAPI.addItemToRemote(text, item=>
                 dispatch(add(item))

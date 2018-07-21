@@ -89,24 +89,29 @@ const listAPI = {
 
     checkItemRemote(item, successCallback){
         let newState = item.complete==true?sType.ACTIVE:sType.COMPLETE;
-        console.log("check remote--item--"+JSON.stringify(item))
+        let search="";
+        if(this.filter !== fType.ALL) search=`?search=${this.filter}`;
+        // console.log("check remote--item--"+JSON.stringify(item))
         axios
-            .put(`${this.url}/1/todoList/${item.id}/list`, {
+            .put(`${this.url}/1/todoList/${item.id}`, {
                 complete: !item.complete,
                 status: newState
+            })
+            .then(response=>{
+                axios
+                    .get(`${this.url}/1/todoList${search}`)
+                    .then(response=>{
+                        console.log("check response----"+JSON.stringify(response.data));
+                        successCallback(response.data)
+                    })
+                    .catch(error=>{
+                        console.log("check get error-----"+error)
+                    });
             })
             .catch(error=>{
                 console.log("check put error-----"+error)
             });
-        axios
-            .get(`${this.url}/1/todoList?search=${newState}`)
-            .then(response=>{
-                console.log("check response----"+JSON.stringify(response.data));
-                successCallback(response.data)
-            })
-            .catch(error=>{
-                console.log("check get error-----"+error)
-            });
+
     },
 
     modify(id, text) {

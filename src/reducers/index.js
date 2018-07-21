@@ -36,7 +36,7 @@ export default (state = initialState, action) => {
         case type.MODIFY:{
             return Object.assign({}, state, {
                 todoList: state.todoList.map((item)=>{
-                    if(item.id===action.id){
+                    if(item.uuid===action.uuid){
                         return action.item;
                     }
                     return item;

@@ -12,8 +12,8 @@ export default class List extends Component {
         filterList.map(item=>{
             listInfo.push(
                 <TodoItem
-                    id={item.id}
-                    key={item.id}
+                    id={item.uuid}
+                    key={item.uuid}
                     item={item}
                     onModify={onModify}
                     onCheckItem={onCheckItem}

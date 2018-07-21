@@ -27,7 +27,8 @@ const listAPI = {
         axios
             .get(`${this.url}/1/todoList${search}`)
             .then(response=>{
-                console.log("get-----"+JSON.stringify(response.data));
+                console.log("filterlist get-----"+JSON.stringify(response.data));
+                this.filter = filter;
                 successCallback(response.data)
             })
             .catch(error=>{
@@ -50,13 +51,22 @@ const listAPI = {
 
     addItemToRemote(text, successCallback){
         let add = {
-            id: generateUUID(),
+            uuid: generateUUID(),
             text,
             complete: false,
             status: "active",
         }
         axios
-            .post(`${this.url}/1/todoList`,)
+            .post(`${this.url}/1/todoList`,add)
+            .then(response=>{
+                console.log("addItem-----"+JSON.stringify(response.data))
+                if(this.filter===fType.ALL||add.status === this.filter){
+                    successCallback(add);
+                }
+            })
+            .catch(error=>{
+                console.log("add error-----"+error)
+            })
     },
 
     checkItem(id){

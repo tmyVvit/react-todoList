@@ -4,9 +4,7 @@ import { setFilter } from '../actions';
 import listAPI from '../api/ListApi'
 
 const mapStateToProps = (state, ownProps) =>{
-    return {
-        // filterType: state.filter
-    }
+    return {}
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {

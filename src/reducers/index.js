@@ -1,25 +1,19 @@
 import * as type from '../constants/ActionType'
-import * as fType from '../constants/FilterType'
-import listAPI from '../api/ListApi'
-
 
 const initialState = {
     filter:"all",
     todoList:[]
 };
-// = listAPI.getInitStat((status)=>{});
-// listAPI.getInitState(((status)=>setState(status, initialState)))
 export default (state = initialState, action) => {
     switch(action.type){
         case type.ADD:{
-            if(action.item !== null) {
-                return Object.assign({}, state, {
-                    todoList:[
-                        ...state.todoList,
-                        action.item
-                    ],
-                })
-            }
+
+            return Object.assign({}, state, {
+                todoList:[
+                    ...state.todoList,
+                    action.item
+                ],
+            })
         }
         case type.CHECK:{
             return {
@@ -30,7 +24,7 @@ export default (state = initialState, action) => {
         case type.FILTER:{
             return {
                 filter: action.filter,
-                todoList:action.filterList
+                todoList:action.list
             };
         }
         case type.MODIFY:{

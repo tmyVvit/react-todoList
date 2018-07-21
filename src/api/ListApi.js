@@ -20,6 +20,7 @@ const listAPI = {
                 successCallback(response.data)
             })
             .catch(error=>{
+                alert("something wrong in server")
                 console.log("error-----"+error)
             })
     },
@@ -41,6 +42,7 @@ const listAPI = {
                 }
             })
             .catch(error=>{
+                alert("something wrong in server, add failed")
                 console.log("add error-----"+error)
             })
     },
@@ -68,6 +70,7 @@ const listAPI = {
                     });
             })
             .catch(error=>{
+                alert("something wrong in server, check failed")
                 console.log("check put error-----"+error)
             });
 
@@ -93,6 +96,7 @@ const listAPI = {
                     });
             })
             .catch(error=>{
+                alert("something wrong in server, modify failed")
                 console.log("check put error-----"+error)
             });
 

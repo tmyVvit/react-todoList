@@ -1,4 +1,3 @@
-import * as fType from '../constants/FilterType'
 import React, {Component} from 'react'
 import '../App.css';
 import TodoItem from '../component/TodoItem';

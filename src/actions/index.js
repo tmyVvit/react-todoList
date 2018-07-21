@@ -14,11 +14,11 @@ export const check = (list)=> {
     }
 }
 
-export const setFilter = (filter, filterList)=>{
+export const setFilter = (filter, list)=>{
     return {
         type: type.FILTER,
         filter,
-        filterList,
+        list,
     }
 }
 

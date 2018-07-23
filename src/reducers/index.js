@@ -15,18 +15,15 @@ export default (state = initialState, action) => {
                 ],
             })
         }
-        case type.CHECK:{
-            return {
-                filter: state.filter,
-                todoList:action.list
-            }
-        }
+
         case type.FILTER:{
             return {
                 filter: action.filter,
                 todoList:action.list
             };
         }
+        case type.CHECK:
+        case type.INIT:
         case type.MODIFY:{
             return {
                 filter: state.filter,

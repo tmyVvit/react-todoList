@@ -28,3 +28,10 @@ export const modify = (list)=> {
         list,
     }
 }
+
+export const init = (list) =>{
+    return {
+        type: type.INIT,
+        list
+    }
+}

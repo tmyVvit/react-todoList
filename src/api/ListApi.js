@@ -3,10 +3,21 @@ import * as sType from '../constants/StatusType'
 
 const axios = require('axios');
 const listAPI = {
-    todoList : [],
+    // todoList : [],
     filter : fType.ALL,
     url: "https://5b52c3e9d9b92700141c997b.mockapi.io/allTodo",
 
+    initlist(successCallback){
+        axios
+            .get(`${this.url}/1/todoList`)
+            .then(response=>{
+                successCallback(response.data)
+            })
+            .catch(error=>{
+                console.log("error-------")
+                successCallback([])
+            })
+    },
     getRemoteFilterList(filter, successCallback){
         let search = ""
         if(filter !== fType.ALL){

@@ -4,6 +4,10 @@ import TodoItem from '../component/TodoItem';
 
 export default class List extends Component {
 
+
+    componentDidMount(){
+        this.props.initList();
+    }
     render(){
         const {filterList, onModify, onCheckItem} = this.props;
         let listInfo = []

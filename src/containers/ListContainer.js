@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import List from '../component/List'
-import {check, modify} from '../actions'
+import {check, modify, init} from '../actions'
 import listAPI from '../api/ListApi'
 
 const mapStateToProps = (state, ownProps) =>{
@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             listAPI.checkItemRemote(item, newList=>{
                 dispatch(check(newList))
             })
+        },
+        initList:()=>{
+            listAPI.initlist(list=>dispatch(init(list)))
         },
     }
 }
